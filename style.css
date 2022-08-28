@@ -4,6 +4,10 @@
     box-sizing: border-box;
     color: white;
 }
+body{
+    background-color: gray;
+}
+
 .main_title{
     background-color: rgb(38, 82, 66);
     max-width: 100vw;
@@ -13,10 +17,21 @@
     font-size: 32px;
 }
 
+.container{
+    max-width: 100vw;
+    height: 100vh;
+    width: 95%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 0px;
+}
+
 .nav_container{
     background-color: rgb(38, 82, 66);
     max-width: 100vw;
-    max-height: 100vh;
     width: 100%;
     margin: 0 auto;
     display: flex;
@@ -29,73 +44,37 @@
 }
 
 .bars_container{
+    max-width: 100vw;
+    width: 100%;
     display: flex;
     flex-direction: row;
 }
 
 .bar{
-    height: 200px;
-    width: 30px;
+    width: 15px;
+    background-color: green;
     border: 1px solid black;
+    border-radius: 2px;
+    transition: height 0.5s ease-in-out;
 }
-/*
-.algos
-        {
-            grid-template-columns: repeat($no_algos,(100%/$no_algos));
-            padding: 2% 0%;
-            button
-            {
-                background-color: transparent;
-                border: none;
-                color: white;
-                outline: none;
-                padding: 5% 0%;
-                font-size: x-large;
-                &:hover
-                {
-                    background-color: blue;
-                    cursor: pointer;
-                }
-            }
-
-            .butt_locked
-            {
-                background-color: transparent;
-                cursor: pointer;
-                &:hover
-                {
-                    background-color: transparent;
-                    cursor: pointer;
-                }
-            }
-            .butt_selected
-            {
-                background-color: white;
-                color:green;
-                &:hover
-                {
-                    background-color: white;
-                    cursor: pointer;
-                }
-            }
-            .butt_unselected
-            {
-                &:hover
-                {
-                    background-color: blue;
-                    cursor: pointer;
-                }
-            }
-        }
-        */
 .sort_options{
     align-items: center;
 }
 .sort_button{
     background-color: rgb(161, 161, 161);
-    padding: 0;
+    padding: 12px;
+
     border: none;
     text-align: center;
     font-size: 15px;
-    padding: 12px;
+}
+.sort_button:hover{
+    background-color: rgb(170, 170, 170);
+}
+.sort_button:active{
+    background-color: rgb(145, 145, 145);
+}
+.sort_button:disabled{
+    background-color: rgb(50, 50, 50);
+    color: rgb(50, 50, 50);
 }

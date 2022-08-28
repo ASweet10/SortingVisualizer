@@ -8,41 +8,44 @@
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
-    <nav>
-      <h1 class="main_title">Sorting Visualizer</h1>
-        <div class="nav_container">
-
-            <div class="array_input_container">
-              <h4 style="text-align: center;">Speed</h4>
-              <input id="sort_speed" type="range" min=1 max=3 step=1 value=2>
-            </div>
-            <div>
-              <h4 style="text-align: center;">Size</h4>
-              <input id="sort_size" type="range" min=20 max=150 step=1 value=80>
-            </div>
-            <div class="buttons_container">
-              <div class="sort_options">
-                <button class="sort_button">Bubble</button>
-                <button class="sort_button">Selection</button>
-                <button class="sort_button">Insertion</button>
-                <button class="sort_button" >Merge</button>
-                <button class="sort_button" >Quick</button>
-                <button class="sort_button" style="margin-right: 0px;">Heap</button>
-            </div>
-            </div>
+      <nav>
+        <h1 class="main_title">Sorting Visualizer</h1>
+          <div class="nav_container">  
+              <div class="array_input_container">
+                <h4 style="text-align: center;">Speed</h4>
+                <input id="sort-speed" type="range" min=10 max=100 step=1 value=65>
+              </div>
+              <div>
+                <h4 style="text-align: center;">Size</h4>
+                <input id="sort-size" type="range" min=10 max=60 step=1 value=35>
+              </div>
+          <div class="buttons_container">
+                <div class="sort_options">
+                  <button class="sort_button" id="bubble-sort-button">Bubble</button>
+                  <button class="sort_button" id="selection-sort-button">Selection</button>
+                  <button class="sort_button" id="merge-sort-button">Merge</button>
+                  <button class="sort_button" id="quick-sort-button" >Quick</button>
+                  <button class="sort_button" id="sort-go-button" style="background-color: rgb(0, 92, 0);">Sort</button>
+                </div>
+              </div>
+          </div>
+      </nav>
+      <div class="container">
+        <div class="bars_container" id="bars-container">
+          <div class="bar"></div>
+          <div class="bar"></div>
+          <div class="bar"></div>
         </div>
-    </nav>
-    <div class="bars_container">
-      <div class="bar"></div>
-      <div class="bar"></div>
-      <div class="bar"></div>
-      <div class="bar"></div>
-
-    </div>
-
-  <footer>
-  </footer>
-
-	<script src="main.js"></script>
+      </div>
+      <div>
+        <div class="test"style="background-color: green;">
+          <p>asdfasdfasdf</p>
+        </div>
+      </div>
+  
+    <footer>
+    </footer>
+  
+    <script src="main.js"></script>
   </body>
 </html>

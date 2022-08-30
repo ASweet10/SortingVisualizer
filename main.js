@@ -1,77 +1,151 @@
-let sortGoButton = document.getElementById("sort-go-button");
+let randomizeArrayButton = document.getElementById("randomize_array_button");
+let sortButton = document.getElementById("sort_button");
+
 let bubbleSortButton = document.getElementById("bubble-sort-button");
 let selectionSortButton = document.getElementById("selection-sort-button");
 let insertionSortButton = document.getElementById("a");
 let mergeSortButton = document.getElementById("merge-sort-button");
 let quickSortButton = document.getElementById("quick-sort-button");
 
-let barsContainer = document.getElementById("bars-container");
 
-let speed = document.getElementById("sort-speed");
-let size = document.getElementById("sort-size");
+let barsContainer = document.getElementById("bars_container");
 
-let sortSpeed = 100;
-let heightFactor = 5;
+let speedInput = document.getElementById("speed");
+let sizeInput = document.getElementById("size");
+
+var bars = [];
+var barSizes = [];
+let sortChoice = "";
+
+let baseSpeed = 110;
+let heightFactor = 3;
 let min = 1;
-let max = 35;
-let numberOfBars = 35;
+let max = sizeInput.value;
+let numberOfBars = sizeInput.value;
 let unsortedArray = new Array(numberOfBars);
 
 
-speed.addEventListener("change", (e)=>{
+speedInput.addEventListener("change", (e)=>{
     sortSpeed = parseInt(e.target.value);
-    console.log(sortSpeed);
+    //Reverse range to properly offset speed in (ms)
+    //Slider from 100 (slow) to 10 (fast)
+    sortSpeed = baseSpeed - sortSpeed;
 })
 
-size.addEventListener("input", function(){
-    numberOfBars = 35;
-    max = 35;
-    barsContainer.innerHTML = "";
+sizeInput.addEventListener("input", function(){
+    numberOfBars = slider.value;
+    max = slider.value;
     unsortedArray = createRandomArray();
+    barsContainer.innerHTML = "";
     renderBars(unsortedArray);
-})
+});
 
+/*
+createArrayButton.addEventListener("click", createArray);
+
+function updateArraySize(){
+    numberOfBars = sizeInput.value;
+    createArray();
+}*/
 
 
 function createRandomArray(){
     let array = new Array(numberOfBars);
-    for(let i = 0; i < numberOfBars; i++) {
-        unsortedArray[i] = randomInt(min, max);
+    /*
+    for(var i = 0; i < numberOfBars; i++) {
+        barSizes[i] = randomInt(min, max);
+        bars[i] = document.createElement("div");
+        barsContainer.appendChild(bars[i]);
+        let margin = 0.1;
+        bars[i].style=" margin:0% " + margin + "%; background-color: green; width:" +
+            (100/numberOfBars-(2*margin)) + "%; height:" + (barSizes[i]) +"%;";
+    }
+    */
+    for(let i=0; i<numberOfBars; i++){
+        array[i] = randomInt(min, max);
     }
     return array;
 }
 
-function renderBars(){
-    for(let i = 0; i < numberOfBars; i++) {
+function renderBars(array){
+    for(let i = 0; i<numberOfBars; i++){
         let bar = document.createElement("div");
         bar.classList.add("bar");
-        let heightText = (unsortedArray[i] * heightFactor).toString();
-        bar.style.height = heightText + "px";
+        bar.style.height = array[i] * heightFactor + "px";
         barsContainer.appendChild(bar);
     }
-} 
+}
 
+randomizeArrayButton.addEventListener("click", function(){
+    unsortedArray = createRandomArray();
+    barsContainer.innerHTML = "";
+    renderBars(unsortedArray);
+});
+
+sortButton.addEventListener("click", function(){
+    switch (sortChoice) {
+      case "Bubble":
+        bubbleSort(unsortedArray);
+        break;
+      case "merge":
+        if (
+          confirm(
+            "Merge Sort is not visualized properly. Do you want to continue?"
+          )
+        ) {
+          mergeSort(unsortedArray);
+        } else {
+          break;
+        }
+        break;
+      case "heap":
+        HeapSort(unsortedArray);
+        break;
+      case "insertion":
+        InsertionSort(unsortedArray);
+        break;
+      case "quick":  
+        quickSort(unsortedArray, 0, unsortedArray.length - 1);
+        break;
+      default:
+        bubbleSort(unsortedArray);
+        break;
+    }
+});
 
 
 document.addEventListener("DOMContentLoaded", function(){
     unsortedArray = createRandomArray();
     renderBars(unsortedArray);
-})
+});
 
-
-sortGoButton.addEventListener("click", function(){
-    unsortedArray = createRandomArray();
-    barsContainer.innerHTML = "";
-    renderBars(unsortedArray);
-})
-
-
+// Change this to function that can disable any button instead of making multiple like a noob
 bubbleSortButton.addEventListener("click", function(){
-    bubbleSort(unsortedArray);
+    sortChoice = "Bubble";
     quickSortButton.disabled = true;
     selectionSortButton.disabled = true;
     mergeSortButton.disabled = true;
-})
+    createArrayButton.disabled = true;
+});
+
+function randomInt(min, max){
+    // Returns a random integer from (min) to (max):
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function sleep(ms){
+    return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+function enableButtons(){
+
+    // Determine which button was pressed before and re-enable
+
+
+    speedInput.disabled = false;
+    sizeInput.disabled = false;
+    createArrayButton.disabled = false;
+}
 
 async function bubbleSort(array){
     let bars = document.getElementsByClassName("bar");
@@ -88,23 +162,20 @@ async function bubbleSort(array){
                 array[j + 1] = temp;
                 bars[j].style.height = array[j] * 10 + "px";
                 bars[j].style.backgroundColor = "red";
+
+                bars[j].title = bars[j].style.height;
+
                 //bars[j].innerText = array[j];
+
                 bars[j + 1].style.height = array[j + 1] * 10 + "px";
                 bars[j + 1].style.backgroundColor = "yellow";
+
                 //bars[j + 1].innerText = array[j + 1];
+
                 await sleep(sortSpeed);
             }
         }
         await sleep(sortSpeed);
     }
     return array;
-}
-
-function randomInt(min, max){
-    // Returns a random integer from (min) to (max):
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
-function sleep(ms){
-    return new Promise((resolve) => setTimeout(resolve, ms));
 }

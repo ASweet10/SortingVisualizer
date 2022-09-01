@@ -1,12 +1,6 @@
 let randomizeArrayButton = document.getElementById("randomize_array_button");
 let sortButton = document.getElementById("sort_button");
-
-let bubbleSortButton = document.getElementById("bubble-sort-button");
-let selectionSortButton = document.getElementById("selection-sort-button");
-let insertionSortButton = document.getElementById("a");
-let mergeSortButton = document.getElementById("merge-sort-button");
-let quickSortButton = document.getElementById("quick-sort-button");
-
+let sortChoiceSelect = document.getElementById("sort_choice");
 
 let barsContainer = document.getElementById("bars_container");
 
@@ -18,6 +12,7 @@ var barSizes = [];
 let sortChoice = "";
 
 let baseSpeed = 110;
+let sortSpeed = 50;
 let heightFactor = 3;
 let min = 1;
 let max = sizeInput.value;
@@ -38,6 +33,10 @@ function updateArraySize(){
     numberOfBars = sizeInput.value;
     createRandomArray();
 }
+
+sortChoiceSelect.addEventListener("choice", function(){
+  sortChoice = sortChoiceSelect.value;
+})
 
 
 function createRandomArray(){
@@ -79,20 +78,12 @@ sortButton.addEventListener("click", function(){
         bubbleSort(unsortedArray);
         break;
       case "merge":
-        if (
-          confirm(
-            "Merge Sort is not visualized properly. Do you want to continue?"
-          )
-        ) {
-          mergeSort(unsortedArray);
-        } else {
-          break;
-        }
+        mergeSort(unsortedArray);
         break;
       case "heap":
         HeapSort(unsortedArray);
         break;
-      case "insertion":
+      case "Insertion":
         InsertionSort(unsortedArray);
         break;
       case "quick":  

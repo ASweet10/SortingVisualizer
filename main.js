@@ -32,21 +32,12 @@ speedInput.addEventListener("change", (e)=>{
     sortSpeed = baseSpeed - sortSpeed;
 })
 
-sizeInput.addEventListener("input", function(){
-    numberOfBars = slider.value;
-    max = slider.value;
-    unsortedArray = createRandomArray();
-    barsContainer.innerHTML = "";
-    renderBars(unsortedArray);
-});
-
-/*
-createArrayButton.addEventListener("click", createArray);
+sizeInput.addEventListener("input", updateArraySize);
 
 function updateArraySize(){
     numberOfBars = sizeInput.value;
-    createArray();
-}*/
+    createRandomArray();
+}
 
 
 function createRandomArray(){
@@ -145,37 +136,4 @@ function enableButtons(){
     speedInput.disabled = false;
     sizeInput.disabled = false;
     createArrayButton.disabled = false;
-}
-
-async function bubbleSort(array){
-    let bars = document.getElementsByClassName("bar");
-    for(let i = 0; i < array.length; i++){
-        for(let j = 0; j < array.length - i - 1; j++){
-            if(array[j] > array[j + 1]){
-                for(let k = 0; k < bars.length; k++){
-                    if(k !== j && k != j + 1){
-                        bars[k].style.backgroundColor = "green";
-                    }
-                }
-                let temp = array[j];
-                array[j] = array[j + 1];
-                array[j + 1] = temp;
-                bars[j].style.height = array[j] * 10 + "px";
-                bars[j].style.backgroundColor = "red";
-
-                bars[j].title = bars[j].style.height;
-
-                //bars[j].innerText = array[j];
-
-                bars[j + 1].style.height = array[j + 1] * 10 + "px";
-                bars[j + 1].style.backgroundColor = "yellow";
-
-                //bars[j + 1].innerText = array[j + 1];
-
-                await sleep(sortSpeed);
-            }
-        }
-        await sleep(sortSpeed);
-    }
-    return array;
 }

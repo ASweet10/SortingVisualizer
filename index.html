@@ -10,24 +10,35 @@
   <body>
     <div class="container">      
       <div class="buttons_container">
-        <label for="speed">Speed</label>
+        <label for="size">Size</label>
 
         <input
           type="range"
           id="size"
-          min="50"
-          max="150"
+          min="10"
+          max="80"
+          step="5"
+          value="45"
+        />
+        <label for="size">Speed</label>
+
+        <input
+          type="range"
+          id="speed"
+          min="1"
+          max="120"
           step="5"
           value="50"
         />
-  
+          <!--
           <select name="" id="speed">
-            <option value="100">Slow</option>
-            <option value="50">Medium</option>
-            <option value="10">Fast</option>
+            <option value="1">Slow</option>
+            <option value="50" selected="selected">Medium</option>
+            <option value="125">Fast</option>
           </select>
+        -->
           <select name="" id="algo">
-            <option value="bubble">Bubble Sort</option>
+            <option value="bubble" selected="selected">Bubble Sort</option>
             <option value="insertion">Insertion Sort</option>
             <option value="heap">Heap Sort</option>
             <option value="merge">Merge Sort</option>
@@ -73,5 +84,6 @@
     </footer>
   
     <script src="main.js"></script>
+    <script src="sortAlgorithms.js"></script>
   </body>
 </html>

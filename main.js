@@ -41,16 +41,6 @@ sortChoiceSelect.addEventListener("change", function(){
 
 function createRandomArray(){
     let array = new Array(numberOfBars);
-    /*
-    for(var i = 0; i < numberOfBars; i++) {
-        barSizes[i] = randomInt(min, max);
-        bars[i] = document.createElement("div");
-        barsContainer.appendChild(bars[i]);
-        let margin = 0.1;
-        bars[i].style=" margin:0% " + margin + "%; background-color: green; width:" +
-            (100/numberOfBars-(2*margin)) + "%; height:" + (barSizes[i]) +"%;";
-    }
-    */
     for(let i=0; i<numberOfBars; i++){
         array[i] = randomInt(min, max);
     }
@@ -83,7 +73,7 @@ sortButton.addEventListener("click", function(){
         disableButtons();
         break;
       case "Heap":
-        HeapSort(unsortedArray);
+        heapSort(unsortedArray);
         disableButtons();
         break;
       case "Insertion":
@@ -126,7 +116,7 @@ function disableButtons(){
 }
 
 function enableButtons(){
-    sortChoiceSelect.disabled = true;
+    sortChoiceSelect.disabled = false;
     randomizeArrayButton.disabled = false;
     sortButton.disabled = false;
 

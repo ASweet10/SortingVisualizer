@@ -50,19 +50,21 @@ body{
 }
 
 .buttons_container > button, select{
-    width: 200px;
-    height: 30px;
-    background-color: #677685;
+    width: 150px;
+    height: 25px;
+    background-color: rgb(168, 168, 168);
     border: none;
-    border-radius: 5px;
-    color: white;
+    border-radius: 10px; /*Round edges*/
     font-size: 14px;
     cursor: pointer;
     text-align: center;
     transition:  0.2s ease-in-out;
 }
-button:hover{
-    background-color: #56697b;
+button:hover, select:hover{
+    background-color: rgb(190, 190, 190);
+}
+button:disabled, select:disabled{
+    background: #4e4e4e;
 }
 
 .empty-div:after{

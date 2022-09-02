@@ -34,7 +34,7 @@ function updateArraySize(){
     createRandomArray();
 }
 
-sortChoiceSelect.addEventListener("choice", function(){
+sortChoiceSelect.addEventListener("change", function(){
   sortChoice = sortChoiceSelect.value;
 })
 
@@ -76,21 +76,27 @@ sortButton.addEventListener("click", function(){
     switch (sortChoice) {
       case "Bubble":
         bubbleSort(unsortedArray);
+        disableButtons();
         break;
-      case "merge":
+      case "Merge":
         mergeSort(unsortedArray);
+        disableButtons();
         break;
-      case "heap":
+      case "Heap":
         HeapSort(unsortedArray);
+        disableButtons();
         break;
       case "Insertion":
-        InsertionSort(unsortedArray);
+        insertionSort(unsortedArray);
+        disableButtons();
         break;
-      case "quick":  
+      case "Quick":  
         quickSort(unsortedArray, 0, unsortedArray.length - 1);
+        disableButtons();
         break;
       default:
         bubbleSort(unsortedArray);
+        disableButtons();
         break;
     }
 });
@@ -99,15 +105,6 @@ sortButton.addEventListener("click", function(){
 document.addEventListener("DOMContentLoaded", function(){
     unsortedArray = createRandomArray();
     renderBars(unsortedArray);
-});
-
-// Change this to function that can disable any button instead of making multiple like a noob
-bubbleSortButton.addEventListener("click", function(){
-    sortChoice = "Bubble";
-    quickSortButton.disabled = true;
-    selectionSortButton.disabled = true;
-    mergeSortButton.disabled = true;
-    createArrayButton.disabled = true;
 });
 
 function randomInt(min, max){
@@ -119,12 +116,20 @@ function sleep(ms){
     return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
+function disableButtons(){
+    sortChoiceSelect.disabled = true;
+    randomizeArrayButton.disabled = true;
+    sortButton.disabled = true;
+
+    speedInput.disabled = true;
+    sizeInput.disabled = true;
+}
+
 function enableButtons(){
-
-    // Determine which button was pressed before and re-enable
-
+    sortChoiceSelect.disabled = true;
+    randomizeArrayButton.disabled = false;
+    sortButton.disabled = false;
 
     speedInput.disabled = false;
     sizeInput.disabled = false;
-    createArrayButton.disabled = false;
 }

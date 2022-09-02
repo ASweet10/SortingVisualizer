@@ -8,7 +8,8 @@
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
-    <div class="container">    
+    <div class="container">
+      <h1 class="main_title">Sorting Visualizer</h1>    
       <div class="buttons_container">
         <label for="size">Size</label>
 
@@ -24,19 +25,13 @@
           max="120"
           value="50"
         />
-          <!--
-          <select name="" id="speed">
-            <option value="1">Slow</option>
-            <option value="50" selected="selected">Medium</option>
-            <option value="125">Fast</option>
-          </select>
-        -->
+
           <select name="" id="sort_choice">
-            <option value="bubble" selected="selected">Bubble Sort</option>
-            <option value="insertion">Insertion Sort</option>
-            <option value="heap">Heap Sort</option>
-            <option value="merge">Merge Sort</option>
-            <option value="quick">Quick Sort</option>
+            <option value="Bubble" selected="selected">Bubble Sort</option>
+            <option value="Insertion">Insertion Sort</option>
+            <option value="Heap">Heap Sort</option>
+            <option value="Merge">Merge Sort</option>
+            <option value="Quick">Quick Sort</option>
           </select>
           <button id="randomize_array_button">Randomize Array</button>
           <button id="sort_button">Sort</button>
@@ -47,33 +42,7 @@
 
       </div>
     </div>
-        <!--
-      <nav>
-        <h1 class="main_title">Sorting Visualizer</h1>
-          <div class="nav_container">  
-              <div class="array_input_container">
-                <h4 style="text-align: center;">Speed</h4>
-                <input id="sort-speed" type="range" min=5 max=100 step=1 value=65>
-              </div>
-              <div>
-                <h4 style="text-align: center;">Size</h4>
-                <input id="sort-size" type="range" min=1 max=35 step=1 value=15>
-              </div>
-              <div>
-                <button class="sort_button" id="randomize-array-button">Randomize Array</button>
-              </div>
-          <div class="buttons_container">
-                <div class="nav_sort_buttons">
-                  <button class="sort_button" id="bubble-sort-button">Bubble</button>
-                  <button class="sort_button" id="selection-sort-button">Selection</button>
-                  <button class="sort_button" id="merge-sort-button">Merge</button>
-                  <button class="sort_button" id="quick-sort-button" >Quick</button>
-                </div>
-              </div>
-          </div>
-      </nav>
-    -->
-  
+
     <script src="main.js"></script>
     <script src="sortAlgorithms.js"></script>
   </body>

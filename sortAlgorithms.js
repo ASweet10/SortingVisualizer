@@ -34,7 +34,6 @@ async function bubbleSort(array){
     }
     for (let k = 0; k < bars.length; k++) {
         bars[k].style.backgroundColor = "rgb(115, 66, 148)";
-        await sleep(sortSpeed);
     }
     enableButtons();
     return array;
@@ -76,7 +75,6 @@ async function insertionSort(array){
     }
     for (let k = 0; k < bars.length; k++) {
         bars[k].style.backgroundColor = "rgb(115, 66, 148)";
-        await sleep(sortSpeed);
     }
     enableButtons();
     return array;
@@ -95,67 +93,64 @@ async function insertionSort(array){
 
 async function quickSort(array, start, end) {
     let bars = document.getElementsByClassName("bar");
-
-    if (start < end) {
-        var pivotPosition = partition(array, start, end);
-        //Sort elements left of pivot
-        quickSort(array, start, pivotPosition - 1);
-        //Sort elements right of pivot
-        quickSort(array, pivot, end);
+    var pivot;
+    if (array.length > 1) 
+    {
+        pivot = await partition(array, start, end);
+        if(start < pivot - 1)
+        {
+            //Sort elements left of pivot
+            await quickSort(array, start, pivot - 1);
+        }
+        if(pivot < end)
+        {
+            //Sort elements right of pivot
+            await quickSort(array, pivot, end);
+        }
+    }
+    else
+    {
+        for (let k = 0; k < bars.length; k++) {
+            bars[k].style.backgroundColor = "rgb(115, 66, 148)";
+        }
+        return array;
     }
   
-    for (let i = 0; i < bars.length; i++) {
-        bars[k].style.backgroundColor = "rgb(115, 66, 148)";
-        await sleep(sortSpeed);
-    }
-    return array;
+
 }
 
 async function partition(array, start, end) {
     let bars = document.getElementsByClassName("bar");
 
-    var next = start + 1;
-    var pivot = array[start];
-    bars[pivot].style.backgroundColor = "red";
+    let pivotIndex = Math.floor((start + end) / 2);
+    var pivot = array[pivotIndex];
+    //var pivot = array[start];
+    bars[pivotIndex].style.backgroundColor = "blue";
 
-    for (let i = 0; i < end; i++) {
-        if(array[i] < pivot) {
-            bars[i].style.backgroundColor = "black";
-            
-            bars[next].style.backgroundColor = "red";
-
-            var temp = array[next];
-            array[next]=array[i];
-            array[i]=temp;
-
-            bars[i].style.backgroundColor = "blue";
-            bars[i].style.height = bars[i] * 10 + "px";
-            bars[next].style.backgroundColor = "blue";
-            bars[next].style.height = bars[next] * 10 + "px";
-
-            i++;
+    for (let i = 0; i < bars.length; i++) {
+        if(i != pivotIndex) {
+            bars[i].style.backgroundColor = "green";
         }
     }
-    
-    var temp = array[start];//put the pivot element in its proper place.
-    array[start] = array[next - 1];
-    array[next - 1] = temp;
 
-    bars[start].style.backgroundColor = "blue";
-    bars[next - 1].style.backgroundColor = "blue";
-
-    for(var t=start;t<=i;t++)
-    {
-        bars[t].style.backgroundColor = "green";
+    while (start <= end) {
+        while(array[start] < pivot)
+        {
+            start++;
+        }
+        while(array[end] > pivot)
+        {
+            end--;
+        }
+        if(start <= end)
+        {
+            await swap(array, start, end, bars);
+            start++;
+            end--;
+        }
     }
-    return next - 1;
+    return start;
 }
-
-
-
-
-
-
 
 async function swap(array, i, j, bars) {
 
@@ -164,13 +159,11 @@ async function swap(array, i, j, bars) {
     array[j] = temp;
 
     bars[i].style.height = array[i] * 10 + "px";
-    bars[i].style.backgroundColor = "red";
+    bars[i].style.backgroundColor = "yellow";
     bars[j].style.height = array[j] * 10 + "px";
-    bars[j].style.backgroundColor = "green";
+    bars[j].style.backgroundColor = "red";
 
     await sleep(sortSpeed);
-
-    return array;
 }
 
 
@@ -181,8 +174,9 @@ async function swap(array, i, j, bars) {
 // -After each (i)teration n, push root of heap into n-i
 // -Bubble next-highest value to the root; repeat until done
 //
-//  <  Time complexity (worst case): O(n log(n))  >
-// -Worst case, outer loop runs (n) times (O(n * n) = O(n^2))
+//  <  Time complexity (worst case): O(n * log(n))  >
+// -Heapify is O(log(n)) worst case, and must be called n-1 times
+// -So O(n) * O(log(n)) = O(n * log(n))
 //
 //  <  Space complexity: O(1)  >
 // -Sorted in-place, no extra memory required
@@ -200,7 +194,6 @@ async function heapSort(array) {
 
     for (let k = 0; k < bars.length; k++) {
       bars[k].style.backgroundColor = "rgb(115, 66, 148)";
-      await sleep(sortSpeed);
     }
     enableButtons();
     return array;
@@ -223,3 +216,18 @@ async function heapify(array, n, i) {
       await heapify(array, n, largest);
     }
 }
+
+
+//  <  Merge Sort  >
+// -Divide input into two halves
+// -Call Merge Sort on both halves 
+// -Merge the two halves once sorted
+//
+//  <  Time complexity (worst case): O(n log(n))  >
+// -Always O(n log(n)) for best, average, and worst case
+// -Array divided in half every step has O(log(n)) complexity and array is merged (n) times
+// -So,  O(n) * O(log(n)) = O(n * log(n))
+//
+//  <  Space complexity: O(n)  >
+// -Store left and right in auxilliary arrays, then back to original array to store once merged
+// -Worst case, each sub-array has N/2 elements, so total potential space would be O(n)

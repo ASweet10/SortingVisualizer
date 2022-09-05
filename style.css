@@ -50,8 +50,8 @@ body{
 }
 
 .buttons_container > button, select{
-    width: 150px;
-    height: 25px;
+    width: 55px;
+    height: 55px;
     background-color: rgb(168, 168, 168);
     border: none;
     border-radius: 10px; /*Round edges*/

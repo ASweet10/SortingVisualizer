@@ -1,6 +1,7 @@
 let randomizeArrayButton = document.getElementById("randomize_array_button");
 let sortButton = document.getElementById("sort_button");
-let sortChoiceSelect = document.getElementById("sort_choice");
+
+//let sortChoiceSelect = document.getElementById("sort_choice");
 
 let barsContainer = document.getElementById("bars_container");
 
@@ -9,7 +10,7 @@ let sizeInput = document.getElementById("size");
 
 var bars = [];
 var barSizes = [];
-let sortChoice = "";
+//let sortChoice = "";
 
 let baseSpeed = 110;
 let sortSpeed = 50;
@@ -34,10 +35,11 @@ function updateArraySize(){
     createRandomArray();
 }
 
+/*
 sortChoiceSelect.addEventListener("change", function(){
   sortChoice = sortChoiceSelect.value;
 })
-
+*/
 
 function createRandomArray(){
     let array = new Array(numberOfBars);
@@ -62,6 +64,7 @@ randomizeArrayButton.addEventListener("click", function(){
     renderBars(unsortedArray);
 });
 
+/*
 sortButton.addEventListener("click", function(){
     switch (sortChoice) {
       case "Bubble":
@@ -85,11 +88,12 @@ sortButton.addEventListener("click", function(){
         disableButtons();
         break;
       default:
-        bubbleSort(unsortedArray);
+        quickSort(unsortedArray, 0, unsortedArray.length - 1);
         disableButtons();
         break;
     }
 });
+*/
 
 
 document.addEventListener("DOMContentLoaded", function(){
@@ -107,18 +111,18 @@ function sleep(ms){
 }
 
 function disableButtons(){
-    sortChoiceSelect.disabled = true;
+    //sortChoiceSelect.disabled = true;
     randomizeArrayButton.disabled = true;
-    sortButton.disabled = true;
+   // sortButton.disabled = true;
 
     speedInput.disabled = true;
     sizeInput.disabled = true;
 }
 
 function enableButtons(){
-    sortChoiceSelect.disabled = false;
+    //sortChoiceSelect.disabled = false;
     randomizeArrayButton.disabled = false;
-    sortButton.disabled = false;
+    //sortButton.disabled = false;
 
     speedInput.disabled = false;
     sizeInput.disabled = false;

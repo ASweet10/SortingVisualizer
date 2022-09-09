@@ -9,45 +9,34 @@
   </head>
   <body>
     <div class="container">
-      <h1 class="main_title">Sorting Visualizer</h1>    
-      <div class="buttons_container">
-        <label for="size">Size</label>
 
-        <input type="range" id="size" step="5"
-          min="10"
-          max="80"
-          value="45"
-        />
-        <label for="size">Speed</label>
+      <div class="buttons_container_test">
+        <div class="buttons_container_left">
 
-        <input type="range" id="speed" step="5"
-          min="1"
-          max="120"
-          value="50"
-        />
-
-        <!--
-          <select name="" id="sort_choice">
-            <option value="Quick" selected="selected">Quick Sort</option>
-            <option value="Bubble">Bubble Sort</option>
-            <option value="Insertion">Insertion Sort</option>
-            <option value="Heap">Heap Sort</option>
-            <option value="Merge">Merge Sort</option>
-          </select>
-        -->
-          <button id="randomize_array_button">Randomize Array</button>
-          <!--<button id="sort_button">Sort</button>-->
-          <button id="bubble_sort_button">bubble-sort</button>
-          <button id="quick_sort_button">quick</button>
-          <button id="insertion_sort_button">insertion</button>
-          <button id="heap_sort_button">heap</button>
-          <button id="merge_sort_button">merge</button>
-
-          <div class="container">
-            <div class="bars_container" id="bars_container"></div>
-          </div>
-
+          <label for="size">Size</label>
+          <input type="range" id="size" step="5" min="10" max="80" value="45"/>
+  
+          <label for="size">Speed</label>
+          <input type="range" id="speed" step="5" in="1" max="120" value="50"/>
+  
+          <button id="randomize_array_button">Randomize</button>
+        </div>
+  
+        <div class="buttons_container_right">
+          <button id="bubble_sort_button">Bubble</button>
+          <button id="quick_sort_button">Quick</button>
+          <button id="insertion_sort_button">Insertion</button>
+          <button id="heap_sort_button">Heap</button>
+          <button id="merge_sort_button">Merge</button>
+  
+        </div>
       </div>
+
+
+      <div class="container">
+        <div class="bars_container" id="bars_container"></div>
+      </div>
+
     </div>
 
     <script src="scripts/main.js"></script>

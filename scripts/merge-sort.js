@@ -1,4 +1,3 @@
-
 //  <  Merge Sort  >
 // -Divide input into two halves
 // -Call Merge Sort recursively on both halves 
@@ -7,49 +6,10 @@
 //  <  Time complexity (worst case): O(n log(n))  >
 // -Always O(n log(n)) for best, average, and worst case
 // -Array divided in half every step has O(log(n)) complexity and array is merged (n) times
-// -So,  O(n) * O(log(n)) = O(n * log(n))
 //
 //  <  Space complexity: O(n)  >
 // -Store left and right in auxilliary arrays, then back to original array to store once merged
 // -Worst case, each sub-array has N/2 elements, so total potential space would be O(n)
-
-/*
-async function merge(left, right){
-    let sortedArray = [];
-    let leftIndex = 0;
-    let rightIndex = 0;
-    while (left.length > 0 && right.length > 0) {
-        await sleep(sortSpeed);
-        // Pick the smaller among the smallest element of left and right sub arrays 
-        if (left[leftIndex] < right[rightIndex]) {
-            sortedArray.push();
-            leftIndex ++;
-        } else {
-            sortedArray.push();
-            rightIndex ++;
-        }
-    }
-    //Use concat because there will always be one element left in one of the arrays
-    sortedArray.concat(left.slice(leftIndex));
-    sortedArray.concat(right.slice(rightIndex));
-
-    return sortedArray;
-}
-*/
-/*
-function mergeSortD(array, start, end) {
-    if (array.length < 2) {
-      return array;
-    }
-  
-    let middle = Math.floor((start + end) / 2);
-    let left = array.slice(start, middle);
-    let right = array.slice(middle, end);
-  
-    mergeSort(right);
-}
-*/
-
 
 async function merge(bars, start, mid, end){
 
@@ -65,48 +25,47 @@ async function merge(bars, start, mid, end){
     let rightArray = new Array(right);
 
     for (let i = 0; i < left; i++) {
-        //bars[start + i].style.height = i * 10 + "px";
-        bars[start + i].style.backgroundColor = "black";
-        leftArray[i] = bars[start + i].style.height * 10 + "px";
-
+        bars[start + i].style.backgroundColor = "red";
+        leftArray[i] = bars[start + i].style.height;
         await sleep(sortSpeed);
+
     }
 
     for (let i = 0; i < right; i++) {
-        //bars[start + 1 + i].style.height = i * 10 + "px";
-        bars[start + 1 + i].style.backgroundColor = "yellow";
 
-        rightArray[i] = bars[mid + 1 + i].style.height * 10 + "px";
+        bars[start + 1 + i].style.backgroundColor = "yellow";
+        rightArray[i] = bars[mid + 1 + i].style.height;
 
         await sleep(sortSpeed);
     }
 
     let i = 0, j = 0, k = start;
+
     while(i < left && j < right){
         await sleep(sortSpeed);
         
         if(parseInt(leftArray[i]) <= parseInt(rightArray[j])){
 
             if((left + right) === bars.length){
-                bars[k].style.backgroundColor = 'green';
+                bars[k].style.backgroundColor = 'brown';
             }
             else{
-                bars[k].style.backgroundColor = 'lightgreen';
+                bars[k].style.backgroundColor = 'green';
             }
             
-            bars[k].style.height = leftArray[i] * 10 + "px";
+            bars[k].style.height = leftArray[i];
             i++;
             k++;
         }
         else{
 
             if((left + right) === bars.length){
-                bars[k].style.backgroundColor = 'green';
+                bars[k].style.backgroundColor = 'brown';
             }
             else{
-                bars[k].style.backgroundColor = 'lightgreen';
+                bars[k].style.backgroundColor = 'green';
             } 
-            bars[k].style.height = rightArray[j] * 10 + "px";
+            bars[k].style.height = rightArray[j];
             j++;
             k++;
         }
@@ -116,10 +75,10 @@ async function merge(bars, start, mid, end){
 
 
         if((left + right) === bars.length){
-            bars[k].style.backgroundColor = 'green';
+            bars[k].style.backgroundColor = 'brown';
         }
         else{
-            bars[k].style.backgroundColor = 'lightgreen';
+            bars[k].style.backgroundColor = 'green';
         }
         bars[k].style.height = leftArray[i];
         i++;
@@ -128,12 +87,11 @@ async function merge(bars, start, mid, end){
     while(j < right){
         await sleep(sortSpeed);
 
-        // color
         if((left + right) === bars.length){
-            bars[k].style.backgroundColor = 'green';
+            bars[k].style.backgroundColor = 'brown';
         }
         else{
-            bars[k].style.backgroundColor = 'lightgreen';
+            bars[k].style.backgroundColor = 'green';
         }
         bars[k].style.height = rightArray[j];
         j++;
@@ -164,7 +122,7 @@ mergeSortButton.addEventListener('click', async function(){
     await mergeSort(array, left, right);
 
     for (let k = 0; k < array.length; k++) {
-        array[k].style.backgroundColor = "rgb(115, 66, 148)";
+        array[k].style.backgroundColor = "brown";
     }
     enableButtons();
 })

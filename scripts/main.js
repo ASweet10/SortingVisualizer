@@ -1,20 +1,16 @@
 let randomizeArrayButton = document.getElementById("randomize_array_button");
-let sortButton = document.getElementById("sort_button");
-
-//let sortChoiceSelect = document.getElementById("sort_choice");
 
 let barsContainer = document.getElementById("bars_container");
 
 let speedInput = document.getElementById("speed");
 let sizeInput = document.getElementById("size");
 
-var bars = [];
+var array = [];
 var barSizes = [];
-//let sortChoice = "";
 
 let baseSpeed = 110;
 let sortSpeed = 50;
-let heightFactor = 3;
+let barHeight = 8;
 let min = 1;
 let max = sizeInput.value;
 let numberOfBars = sizeInput.value;
@@ -35,11 +31,6 @@ function updateArraySize(){
     createRandomArray();
 }
 
-/*
-sortChoiceSelect.addEventListener("change", function(){
-  sortChoice = sortChoiceSelect.value;
-})
-*/
 
 function createRandomArray(){
     let array = new Array(numberOfBars);
@@ -53,7 +44,7 @@ function renderBars(array){
     for(let i = 0; i<numberOfBars; i++){
         let bar = document.createElement("div");
         bar.classList.add("bar");
-        bar.style.height = array[i] * heightFactor + "px";
+        bar.style.height = array[i] * barHeight + "px";
         barsContainer.appendChild(bar);
     }
 }
@@ -63,38 +54,6 @@ randomizeArrayButton.addEventListener("click", function(){
     barsContainer.innerHTML = "";
     renderBars(unsortedArray);
 });
-
-/*
-sortButton.addEventListener("click", function(){
-    switch (sortChoice) {
-      case "Bubble":
-        bubbleSort(unsortedArray);
-        disableButtons();
-        break;
-      case "Merge":
-        mergeSort(unsortedArray);
-        disableButtons();
-        break;
-      case "Heap":
-        heapSort(unsortedArray);
-        disableButtons();
-        break;
-      case "Insertion":
-        insertionSort(unsortedArray);
-        disableButtons();
-        break;
-      case "Quick":  
-        quickSort(unsortedArray, 0, unsortedArray.length - 1);
-        disableButtons();
-        break;
-      default:
-        quickSort(unsortedArray, 0, unsortedArray.length - 1);
-        disableButtons();
-        break;
-    }
-});
-*/
-
 
 document.addEventListener("DOMContentLoaded", function(){
     unsortedArray = createRandomArray();
@@ -111,19 +70,25 @@ function sleep(ms){
 }
 
 function disableButtons(){
-    //sortChoiceSelect.disabled = true;
-    randomizeArrayButton.disabled = true;
-   // sortButton.disabled = true;
+  document.getElementById("bubble_sort_button").disabled = true;
+  document.getElementById("quick_sort_button").disabled = true;
+  document.getElementById("insertion_sort_button").disabled = true;
+  document.getElementById("heap_sort_button").disabled = true;
+  document.getElementById("merge_sort_button").disabled = true;
+  randomizeArrayButton.disabled = true;
 
-    speedInput.disabled = true;
-    sizeInput.disabled = true;
+  speedInput.disabled = true;
+  sizeInput.disabled = true;
 }
 
 function enableButtons(){
-    //sortChoiceSelect.disabled = false;
-    randomizeArrayButton.disabled = false;
-    //sortButton.disabled = false;
+  document.getElementById("bubble_sort_button").disabled = false;
+  document.getElementById("quick_sort_button").disabled = false;
+  document.getElementById("insertion_sort_button").disabled = false;
+  document.getElementById("heap_sort_button").disabled = false;
+  document.getElementById("merge_sort_button").disabled = false;
+  randomizeArrayButton.disabled = false;
 
-    speedInput.disabled = false;
-    sizeInput.disabled = false;
+  speedInput.disabled = false;
+  sizeInput.disabled = false;
 }

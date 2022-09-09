@@ -16,11 +16,10 @@ async function insertionSort(array){
         let j = i - 1;
         while ((j >= 0) && (array[j] > index)) {
             array[j + 1] = array[j];
-            bars[j + 1].style.height =  array[j + 1] * 10 + "px";
+            bars[j + 1].style.height =  array[j + 1] * barHeight + "px";
             bars[j + 1].style.backgroundColor = "red";
             await sleep(sortSpeed);
-
-            for (let k = 0; k < bars.length; k++) {
+            for (let k = i; k >= 0; k--) {
                 if (k != j + 1) {
                     bars[k].style.backgroundColor = "green";
                 }
@@ -28,14 +27,11 @@ async function insertionSort(array){
             j--;
         }
         array[j + 1] = index;
-        bars[j + 1].style.height = array[j + 1] * 10 + "px";
-        bars[j + 1].style.backgroundColor = "blue";
+        bars[j + 1].style.height = array[j + 1] * barHeight + "px";
+        bars[j + 1].style.backgroundColor = "brown";
         await sleep(sortSpeed);
     }
-    for (let k = 0; k < bars.length; k++) {
-        bars[k].style.backgroundColor = "rgb(115, 66, 148)";
-    }
-    enableButtons();
+    
     return array;
 }
 
@@ -43,5 +39,8 @@ const insertSortButton = document.getElementById("insertion_sort_button");
 insertSortButton.addEventListener('click', async function(){
     disableButtons();
     await insertionSort(unsortedArray);
+    for (let k = 0; k < bars.length; k++) {
+        bars[k].style.backgroundColor = "brown";
+    }
     enableButtons();
 })

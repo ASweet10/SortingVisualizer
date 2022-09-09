@@ -10,87 +10,69 @@
 // -O(log(n)) possible over O(n) if in-place partitioning used
 
 async function quickSort(array, start, end) {
-    let bars = document.getElementsByClassName("bar");
-    var pivot;
-    if (array.length > 1) 
-    {
-        pivot = await partition(array, start, end);
-        if(start < pivot - 1)
-        {
-            //Sort elements left of pivot
-            await quickSort(array, start, pivot - 1);
-        }
-        if(pivot < end)
-        {
-            //Sort elements right of pivot
-            await quickSort(array, pivot, end);
+    if (start < end) {
+        let pivot = await partition(array, start, end);
+        await quickSort(array, start, pivot -1);
+        await quickSort(array, pivot + 1, end);
+    }
+    else{
+        if(start >= 0 && end >= 0 && start < array.length && end < array.length){
+            array[end].style.backgroundColor = "green";
+            array[end].style.backgroundColor = "green";
         }
     }
-    else
-    {
-        for (let k = 0; k < bars.length; k++) {
-            bars[k].style.backgroundColor = "rgb(115, 66, 148)";
-        }
-        return array;
-    }
-  
-
 }
 
 async function partition(array, start, end) {
-    let bars = document.getElementsByClassName("bar");
+    let index = start - 1;
+    array[end].style.backgroundColor = "red";
 
-    let pivotIndex = Math.floor((start + end) / 2);
-    var pivot = array[pivotIndex];
-    //var pivot = array[start];
-    bars[pivotIndex].style.backgroundColor = "blue";
+    for (let j = start; j <= end - 1; j++) {
+        array[j].style.backgroundColor = "yellow";
+        await sleep(sortSpeed);
 
-    for (let i = 0; i < bars.length; i++) {
-        if(i != pivotIndex) {
-            bars[i].style.backgroundColor = "green";
+        if(parseInt(array[j].style.height) < parseInt(array[end].style.height)){
+            index++;            
+
+            let temp = array[index].style.height;
+            array[index].style.height = array[j].style.height;
+            array[j].style.height = temp;
+
+            array[index].style.backgroundColor = "red";
+            await sleep(sortSpeed);
+        }
+        else{
+            array[j].style.backgroundColor = "brown";
         }
     }
+    index++;
+    await sleep(sortSpeed);
 
-    while (start <= end) {
-        while(array[start] < pivot)
-        {
-            start++;
-        }
-        while(array[end] > pivot)
-        {
-            end--;
-        }
-        if(start <= end)
-        {
-            await swap(array, start, end, bars);
-            start++;
-            end--;
-        }
-    }
-    return start;
-}
+    temp = array[index].style.height;
+    array[index].style.height = array[end].style.height;
+    array[end].style.height = temp;
 
-async function swap(array, i, j, bars) {
-
-    var temp = array[i];
-    array[i] = array[j];
-    array[j] = temp;
-
-    bars[i].style.height = array[i] * 10 + "px";
-    bars[i].style.backgroundColor = "yellow";
-    bars[j].style.height = array[j] * 10 + "px";
-    bars[j].style.backgroundColor = "red";
+    array[end].style.backgroundColor = "brown";
+    array[index].style.backgroundColor = "green";
 
     await sleep(sortSpeed);
+
+    for(let k = 0; k < array.length; k++){
+        if(array[k].style.backgroundColor != "green"){
+            array[k].style.backgroundColor = "brown";
+        }
+    }
+
+    return index;
 }
 
 const quickSortButton = document.getElementById("quick_sort_button");
 quickSortButton.addEventListener('click', async function(){
     let bars = document.getElementsByClassName("bar");
     disableButtons();
-    await quickSort(unsortedArray, 0, unsortedArray.length - 1);
+    await quickSort(bars, 0, bars.length - 1);
     for (let k = 0; k < bars.length; k++) {
-        bars[k].style.backgroundColor = "rgb(115, 66, 148)";
+        bars[k].style.backgroundColor = "brown";
     }
     enableButtons();
 })

@@ -50,10 +50,14 @@ function renderBars(array){
 }
 
 randomizeArrayButton.addEventListener("click", function(){
+    randomizeArray();
+});
+
+function randomizeArray(){
     unsortedArray = createRandomArray();
     barsContainer.innerHTML = "";
     renderBars(unsortedArray);
-});
+}
 
 document.addEventListener("DOMContentLoaded", function(){
     unsortedArray = createRandomArray();

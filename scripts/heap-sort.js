@@ -77,10 +77,10 @@ async function swap(array, i, j, bars) {
 const heapSortButton = document.getElementById("heap_sort_button");
 heapSortButton.addEventListener('click', async function(){
   let bars = document.getElementsByClassName("bar");
-    disableButtons();
-    await heapSort(unsortedArray);
-    for (let k = 0; k < bars.length; k++) {
-      bars[k].style.backgroundColor = "brown";
-    }
-    enableButtons();
+  disableButtons();
+  await heapSort(unsortedArray);
+  for (let k = 0; k < bars.length; k++) {
+    bars[k].style.backgroundColor = "brown";
+  }
+  enableButtons();
 })

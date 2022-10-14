@@ -37,6 +37,7 @@ async function insertionSort(array){
 
 const insertSortButton = document.getElementById("insertion_sort_button");
 insertSortButton.addEventListener('click', async function(){
+    let bars = document.getElementsByClassName("bar");
     disableButtons();
     await insertionSort(unsortedArray);
     for (let k = 0; k < bars.length; k++) {

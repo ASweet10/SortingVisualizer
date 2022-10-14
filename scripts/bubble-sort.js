@@ -38,6 +38,7 @@ const bubbleSortButton = document.getElementById("bubble_sort_button");
 bubbleSortButton.addEventListener('click', async function(){
     disableButtons();
     await bubbleSort(unsortedArray);
+    let bars = document.getElementsByClassName("bar");
     for (let k = 0; k < bars.length; k++) {
         bars[k].style.backgroundColor = "brown";
     }
